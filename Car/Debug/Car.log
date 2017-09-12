@@ -1,0 +1,12 @@
+﻿  Sensor.cpp
+c:\users\sozary\desktop\programmation\car\car\sensor.cpp(15): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+c:\users\sozary\desktop\programmation\car\car\sensor.cpp(18): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+c:\users\sozary\desktop\programmation\car\car\sensor.cpp(31): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+c:\users\sozary\desktop\programmation\car\car\sensor.cpp(32): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+c:\users\sozary\desktop\programmation\car\car\sensor.cpp(40): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+c:\users\sozary\desktop\programmation\car\car\sensor.cpp(41): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+  Core.cpp
+  Car.cpp
+  Génération de code en cours...
+  Car.vcxproj -> C:\Users\Sozary\Desktop\Programmation\Car\Debug\Car.exe
+  Car.vcxproj -> C:\Users\Sozary\Desktop\Programmation\Car\Debug\Car.pdb (Full PDB)
