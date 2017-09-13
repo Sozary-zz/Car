@@ -9,7 +9,8 @@ public:
 	Car(bool draw_Sensorss = false);
 	~Car();
 	sf::Vector2f getOrigin();
-	void update(const std::vector<sf::RectangleShape>& obstacles);
+	void update(const std::vector<sf::RectangleShape>& obstacles, sf::RectangleShape a, sf::RectangleShape b);
+	void moveForward(sf::Time elaspded_time,double speed, float angle);
 
 private:
 	sf::RectangleShape m_shape;

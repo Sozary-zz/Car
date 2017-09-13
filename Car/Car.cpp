@@ -29,11 +29,44 @@ sf::Vector2f Car::getOrigin()
 	return Vector2f(50, 25);
 }
 
-void Car::update(const std::vector<sf::RectangleShape>& obstacles)
+void Car::update(const std::vector<sf::RectangleShape>& obstacles, RectangleShape a, RectangleShape b)
 {
-	for (auto & x : obstacles)
-		for (int i = 0; i < 5; ++i)
-			m_sensors[i]->updateCollision(x, this->getTransform());
+	bool hit = false;
+	RectangleShape ob;
+	for (const auto & x : obstacles) {
+
+		hit = m_sensors[2]->updateCollision(x, this->getTransform());
+
+		if (hit)
+		{
+			ob = x;
+			break;
+		}
+
+	}
+	if (hit)
+		while (m_sensors[2]->updateCollision(ob, this->getTransform()) && m_sensors[2]->getSensorSize() > 10)
+			m_sensors[2]->handleHit(hit);
+
+	else
+		while (!m_sensors[2]->updateCollision(ob, this->getTransform()) && m_sensors[2]->getSensorSize() < 100)
+			m_sensors[2]->handleHit(hit);
+
+
+
+
+
+
+
+
+
+
+}
+
+void Car::moveForward(Time elaspded_time, double speed, float angle)
+{
+	this->rotate(angle);
+	this->move(cos(this->getRotation()*3.14159265 / 180) * speed*elaspded_time.asSeconds(), sin(this->getRotation()*3.14159265 / 180) * speed*elaspded_time.asSeconds());
 }
 
 

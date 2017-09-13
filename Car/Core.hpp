@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "car.hpp"
+#include "Simulation.hpp"
 
 class Core
 {
@@ -12,12 +12,13 @@ public:
 private:
 	sf::RenderWindow m_window;
 	const sf::Time TimePerFrame;
-	Car* m_car;
-	std::vector<sf::RectangleShape> m_obs;
+	
+	Simulation* m_sim;
+
 
 
 private:
-	void processEvent();
+	void processEvent(sf::Time);
 	void update(sf::Time);
 	void render();
 };

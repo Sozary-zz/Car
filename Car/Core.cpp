@@ -1,19 +1,16 @@
 #include "core.hpp"
 #define GAME_FPS 60.f
-
+#include <iostream>
 
 using namespace std;
 using namespace sf;
 
 Core::Core(int w, int h, const string& title) :
-	m_window(VideoMode(w, h), title, Style::Close), TimePerFrame(seconds(1.f / (float)GAME_FPS))
+m_window(VideoMode(w, h), title, Style::Close, ContextSettings{ 0,0,8 }), TimePerFrame(seconds(1.f / (float)GAME_FPS))
 {
-	m_car = new Car(true);
-	m_car->setPosition(0, 0);
-	m_car->setOrigin(m_car->getOrigin());
 
-	m_car->move(200, 200);
-
+	m_sim = new Simulation();
+	
 }
 
 
@@ -27,20 +24,21 @@ void Core::run()
 	while (m_window.isOpen())
 	{
 
-		processEvent();
+		processEvent(TimePerFrame);
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
-			processEvent();
+			processEvent(TimePerFrame);
 			update(TimePerFrame);
 		}
 		render();
 	}
 }
 
-void Core::processEvent()
+void Core::processEvent(Time delta)
 {
+
 
 	Event event;
 
@@ -48,9 +46,6 @@ void Core::processEvent()
 	{
 		switch (event.type)
 		{
-		case Event::MouseMoved:
-
-			break;
 		case Event::KeyReleased:
 			break;
 		case Event::KeyPressed:
@@ -58,10 +53,14 @@ void Core::processEvent()
 			{
 
 			case Keyboard::Left:
-				m_car->rotate(2);
+				break;
+
+			case Keyboard::Up:
+
+				
 				break;
 			case Keyboard::Right:
-				m_car->rotate(-2);
+			
 				break;
 
 			case Keyboard::Escape:
@@ -80,7 +79,7 @@ void Core::processEvent()
 
 void Core::update(Time deltaTime)
 {
-	m_car->update(m_obs);
+	m_sim->update(deltaTime);
 }
 
 
@@ -88,9 +87,6 @@ void Core::render()
 {
 	m_window.clear();
 
-	for (auto x : m_obs)
-		m_window.draw(x);
-
-	m_window.draw(*m_car);
+	m_window.draw(*m_sim);
 	m_window.display();
 }
