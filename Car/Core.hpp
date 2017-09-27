@@ -3,10 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include "Simulation.hpp"
 
+
 class Core
 {
 public:
 	Core(int w, int h, const std::string& title);
+	~Core();
 	void run();
 
 private:
@@ -14,8 +16,6 @@ private:
 	const sf::Time TimePerFrame;
 	
 	Simulation* m_sim;
-
-
 
 private:
 	void processEvent(sf::Time);

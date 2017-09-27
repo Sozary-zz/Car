@@ -1,4 +1,14 @@
-﻿  Car.cpp
-c:\users\sozary\desktop\programmation\car\car\car.cpp(69): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+﻿  Core.cpp
+  Génération de code en cours...
+  Compilation en cours...
+  Simulation.cpp
+c:\users\sozary\desktop\programmation\car\car\simulation.cpp(39): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+c:\users\sozary\desktop\programmation\car\car\simulation.cpp(152): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+  Main.cpp
+  Genetic.cpp
+c:\users\sozary\desktop\programmation\car\car\genetic.cpp(25): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\sozary\desktop\programmation\car\car\genetic.cpp(54): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\sozary\desktop\programmation\car\car\genetic.cpp(65): warning C4018: '<' : incompatibilité signed/unsigned
+  Génération de code en cours...
   Car.vcxproj -> C:\Users\Sozary\Desktop\Programmation\Car\Debug\Car.exe
   Car.vcxproj -> C:\Users\Sozary\Desktop\Programmation\Car\Debug\Car.pdb (Full PDB)

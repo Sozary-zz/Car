@@ -3,7 +3,7 @@
 using namespace sf;
 using namespace std;
 
-Car::Car(bool draw_Sensorss) :m_drawings(draw_Sensorss)
+Car::Car(bool draw_Sensorss) :m_drawings(draw_Sensorss),m_end(false)
 {
 	m_shape.setSize(Vector2f(100, 50));
 	m_shape.setFillColor(Color::Red);
@@ -29,44 +29,62 @@ sf::Vector2f Car::getOrigin()
 	return Vector2f(50, 25);
 }
 
-void Car::update(const std::vector<sf::RectangleShape>& obstacles, RectangleShape a, RectangleShape b)
+void Car::update(const std::vector<sf::RectangleShape>& obstacles)
 {
+
 	bool hit = false;
 	RectangleShape ob;
-	for (const auto & x : obstacles) {
 
-		hit = m_sensors[2]->updateCollision(x, this->getTransform());
+	SensorCollision collisions[5];
 
-		if (hit)
-		{
-			ob = x;
-			break;
+	for (const auto & x : obstacles)
+		if (this->getTransform().transformRect(m_shape.getGlobalBounds()).intersects(x.getGlobalBounds()))
+			m_end = true;
+
+	for (int i = 0; i < 5; ++i) {
+		collisions[i].collision = false;
+		for (const auto & x : obstacles) {
+			collisions[i].collision = m_sensors[2]->updateCollision(x, this->getTransform());
+			if (collisions[i].collision)
+			{
+				collisions[i].object = x;
+				break;
+			}
+
 		}
+	}
+
+	for (int i = 0; i < 5; ++i) {
+		if (collisions[i].collision)
+			while (m_sensors[i]->updateCollision(collisions[i].object, this->getTransform()) && m_sensors[i]->getSensorSize() > 10)
+				m_sensors[i]->handleHit(collisions[i].collision);
+
+		else
+			while (!m_sensors[i]->updateCollision(collisions[i].object, this->getTransform()) && m_sensors[i]->getSensorSize() < 100)
+				m_sensors[i]->handleHit(collisions[i].collision);
 
 	}
-	if (hit)
-		while (m_sensors[2]->updateCollision(ob, this->getTransform()) && m_sensors[2]->getSensorSize() > 10)
-			m_sensors[2]->handleHit(hit);
-
-	else
-		while (!m_sensors[2]->updateCollision(ob, this->getTransform()) && m_sensors[2]->getSensorSize() < 100)
-			m_sensors[2]->handleHit(hit);
-
-
-
-
-
-
-
-
-
-
 }
 
 void Car::moveForward(Time elaspded_time, double speed, float angle)
 {
 	this->rotate(angle);
 	this->move(cos(this->getRotation()*3.14159265 / 180) * speed*elaspded_time.asSeconds(), sin(this->getRotation()*3.14159265 / 180) * speed*elaspded_time.asSeconds());
+}
+
+std::vector<float> Car::getSensorsData() const
+{
+	vector<float> res;
+	
+	for (int i = 0; i < 5; ++i)
+		res.push_back(m_sensors[i]->getSensorSize());
+
+	return res;
+}
+
+bool Car::canMove() const
+{
+	return !m_end;
 }
 
 

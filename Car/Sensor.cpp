@@ -22,59 +22,8 @@ bool Sensors::updateCollision(const sf::RectangleShape & obstacle, const sf::Tra
 {
 	auto  x = transformations * this->getTransform();
 
-	return x.transformRect(m_target.getGlobalBounds()).intersects(obstacle.getGlobalBounds());
-	/*
-			if (m_range > 10)
-			{
-				cout << "k" ;
-				m_target.setPosition(m_shape.getPosition() + Vector2f(0, --m_range));
-				return true;
-			}
-	}
-	else {
-			if (m_range < 100)
-			{
-				cout << "l";
-				m_target.setPosition(m_shape.getPosition() + Vector2f(0, ++m_range));
-			}
-
-
-
-		//
-	}*/
-	//if (!x.transformRect(m_target.getGlobalBounds()).intersects(obstacle.getGlobalBounds()) && m_range < 100)
-	//	
-	// HERE ALPHA MIGHT BE REMOVED
-	/*while (
-		(x.transformRect(m_target.getGlobalBounds()).intersects(obstacle.getGlobalBounds()) ||
-			x.transformRect(m_link.getBounds()).intersects(obstacle.getGlobalBounds())) // ALPHA
-		&& m_range > 10)
-	{
-		if (!disp)
-		{
-			cout << m_range << endl;
-			disp = true;
-		}
-
-
-		m_target.setPosition(m_shape.getPosition() + Vector2f(0, --m_range));
-		m_link[1].position = m_shape.getPosition() + Vector2f(0, m_range) + Vector2f(5, 5);
-
-
-	}
-	cout << "=> "<<m_range << endl;
-	while (!
-		(x.transformRect(m_target.getGlobalBounds()).intersects(obstacle.getGlobalBounds()) ||
-			x.transformRect(m_link.getBounds()).intersects(obstacle.getGlobalBounds())) // ALPHA
-		&& m_range < 100)
-	{
-
-		m_target.setPosition(m_shape.getPosition() + Vector2f(0, ++m_range));
-		m_link[1].position = m_shape.getPosition() + Vector2f(0, m_range) + Vector2f(5, 5);
-	}*/
-
-
-
+	return x.transformRect(m_target.getGlobalBounds()).intersects(obstacle.getGlobalBounds())|| x.transformRect(m_link.getBounds()).intersects(obstacle.getGlobalBounds());
+	
 }
 
 void Sensors::handleHit(bool hit)

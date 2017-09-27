@@ -6,11 +6,16 @@ using namespace std;
 using namespace sf;
 
 Core::Core(int w, int h, const string& title) :
-m_window(VideoMode(w, h), title, Style::Close, ContextSettings{ 0,0,8 }), TimePerFrame(seconds(1.f / (float)GAME_FPS))
+	m_window(VideoMode(w, h), title, Style::Close, ContextSettings{ 0,0,8 }), TimePerFrame(seconds(1.f / (float)GAME_FPS))
 {
 
 	m_sim = new Simulation();
-	
+
+}
+
+Core::~Core()
+{
+	delete m_sim;
 }
 
 
@@ -57,10 +62,10 @@ void Core::processEvent(Time delta)
 
 			case Keyboard::Up:
 
-				
+
 				break;
 			case Keyboard::Right:
-			
+
 				break;
 
 			case Keyboard::Escape:
@@ -80,13 +85,13 @@ void Core::processEvent(Time delta)
 void Core::update(Time deltaTime)
 {
 	m_sim->update(deltaTime);
+	m_window.setTitle("Max fitness: " + to_string(m_sim->getMaxFitness()));
 }
 
 
 void Core::render()
 {
 	m_window.clear();
-
 	m_window.draw(*m_sim);
 	m_window.display();
 }

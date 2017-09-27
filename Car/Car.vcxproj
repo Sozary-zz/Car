@@ -66,6 +66,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Genetic.cpp" />
+    <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="Sensor.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -76,6 +78,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Genetic.hpp" />
+    <ClInclude Include="NeuralNetwork.hpp" />
     <ClInclude Include="Sensor.hpp" />
     <ClInclude Include="Car.hpp" />
     <ClInclude Include="Core.hpp" />

@@ -2,7 +2,7 @@
 
 int main()
 {
-	Core* app = new Core(800, 600, "Cars");
+	Core* app = new Core(1200, 650, "Cars");
 	app->run();
 	return 0;
 }
